@@ -100,6 +100,46 @@ fun WeatherMain(){
                 }
             }
             //TODO: Add bottom here
+            @Composable
+            fun DailyWeatherItem(weatherUpdate: Weather.WeatherUpdate) {
+                Card(
+                    modifier = Modifier
+                        .wrapContentSize()
+                        .padding(4.dp),
+                    elevation = 1.dp,
+                    shape = MaterialTheme.shapes.small
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.padding(top = 8.dp, bottom = 8.dp, start = 16.dp, end = 16.dp)
+                    ) {
+                        ReusableImage(
+                            image = when (weatherUpdate.icon) {
+                                "wind" -> R.drawable.ic_moon_cloud_fast_wind
+                                "rain" -> R.drawable.ic_moon_cloud_mid_rain
+                               "angledRain" -> R.drawable.ic_sun_cloud_angled_rain
+                                "thunder" -> R.drawable.ic_zaps
+                                else -> R.drawable.ic_moon_cloud_fast_wind
+                            },
+                            contentScale = ContentScale.Fit,
+                            contentDesc = "Weather Icon",
+                            modifier = Modifier
+                                .size(64.dp)
+                                .padding(bottom = 4.dp)
+                        )
+                        Text(
+                            text = weatherUpdate.time,
+                            style = MaterialTheme.typography.caption,
+                            modifier = Modifier.padding(4.dp)
+                        )
+                        Text(
+                            text = "${weatherUpdate.temp}°",
+                            style = MaterialTheme.typography.body2,
+                            modifier = Modifier.padding(4.dp)
+                        )
+                    }
+                }
+            }
         }
     }
 }    
